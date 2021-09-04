@@ -1,0 +1,30 @@
+:root {
+    --sketch-pad-border-colour: black;
+    --sketch-pad-size: 660px;
+    --cols: 1;
+    --rows: 1;
+}
+
+body {
+    display: flex;
+    width: 100vw;
+    height: 100vh;
+    justify-content: center;
+    align-items: center;
+}
+
+.sketch-pad {
+    display: grid;
+    grid-template-columns: repeat(var(--cols), 1fr);
+    grid-template-rows: repeat(var(--rows), 1fr);
+    margin: auto;
+    border: 2px solid var(--sketch-pad-border-colour);
+    width: var(--sketch-pad-size);
+    height: var(--sketch-pad-size);
+    
+}
+
+.pixel {
+    border: .5px solid var(--sketch-pad-border-colour);
+    text-align: center;
+}

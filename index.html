@@ -6,10 +6,26 @@
     <title>Etch a Sketch</title>
     <link rel="stylesheet" href="style.css">
     <script src="app.js" defer></script>
+    <link href="https://fonts.googleapis.com/css2?family=Yellowtail&display=swap" rel="stylesheet"> 
 </head>
 <body>
-    <div class="sketch-pad">
-
+    <div class="window-width">
+        <div class="etch-sketch">
+            <h1>Etch A Sketch</h1>
+            <div class="sketch-pad"></div>
+            <div class="knobs">
+                <div class="knob"></div>
+                <div class="knob"></div>
+            </div>
+        </div>
+    </div>
+    <div class="window-width">
+        <div class="control-panel">
+            <input type="button" value="Reset" class="control-item" id="reset-button">
+            <input type="range" min="16" max="100" value="50" class="control-item" id="pixel-slider">
+            <input type="color" class="control-item" value="#000000" id="colour-selector">
+            <input type="button" value="Taste the Rainbow" class="control-item" id="random-colour-button">
+        </div>
     </div>
 </body>
 </html>

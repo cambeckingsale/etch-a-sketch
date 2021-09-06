@@ -13,39 +13,24 @@ const paintPixel = (e) => {
     
 }
 
-const clearAnimation = (numPixelsWide, numPixelsHigh) => {
-    const sketchPad = document.querySelector(".sketch-pad");
-    const pixels = Array.from(document.querySelectorAll('.pixel'))
-    if (pixels.length > 0) {
-        for (let y = 0; y < numPixelsHigh; y++) {
-            setTimeout(() => {
-                for (let x = 0; x < numPixelsWide; x++) {
-                    console.log(pixels[(y*numPixelsWide)+x]);
-                    console.log(pixels[(y*numPixelsWide)+x].backgroundColor)
-                    pixels[(y*numPixelsWide)+x].backgroundColor = 'black';
-                    console.log(pixels[(y*numPixelsWide)+x].backgroundColor)
-                }
-            }, 500)
-        }        
-    }
-    while (sketchPad.firstChild) {
-        sketchPad.firstChild.remove()
-    }
-}
-
-const setupSketchPad = (numPixelsWide) => {
+const setupSketchPad = async (numPixelsWide, init) => {
     const sketchPad = document.querySelector(".sketch-pad");
     let width = sketchPad.offsetWidth
     let height = sketchPad.offsetHeight
     let numPixelsHigh = Math.ceil(height / (width/numPixelsWide));
-    clearAnimation(numPixelsWide, numPixelsHigh)
+    while (sketchPad.firstChild) {
+           sketchPad.firstChild.remove()
+    }
     sketchPad.style.setProperty('--cols', numPixelsWide);
     sketchPad.style.setProperty('--rows', numPixelsHigh);
-    for (let i = 0; i < (numPixelsWide*numPixelsHigh); i++) {
-        let pixel = document.createElement("div");
-        pixel.classList.add("pixel");
-        pixel.addEventListener('mousemove', paintPixel);
-        sketchPad.appendChild(pixel)
+    for (let y = 0; y < (numPixelsWide); y++) {
+        for (let x = 0; x < (numPixelsWide); x++) {
+            let pixel = document.createElement("div");
+            pixel.classList.add("pixel");
+            pixel.id = `row${y}`;
+            pixel.addEventListener('mousemove', paintPixel);
+            sketchPad.appendChild(pixel)
+        }
     }
 }
 
@@ -57,10 +42,10 @@ const setUpControls = () => {
     colourSelector.value = '#000000';
     pixelSlider.value = defaultNumPixelsWide;
     pixelSlider.addEventListener('change', (e) => {
-        setupSketchPad(e.target.value);
+        setupSketchPad(e.target.value, 0);
     });
     resetButton.addEventListener('click', (e) => {
-        setupSketchPad(pixelSlider.value);
+        setupSketchPad(pixelSlider.value, 0);
     });
     colourSelector.addEventListener('change', (e) => {
         paintColour = e.target.value;
@@ -72,5 +57,5 @@ const setUpControls = () => {
 
 }
 
-setupSketchPad(defaultNumPixelsWide);
+setupSketchPad(defaultNumPixelsWide, 1);
 setUpControls();

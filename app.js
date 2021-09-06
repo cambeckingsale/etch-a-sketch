@@ -7,7 +7,6 @@ const paintPixel = (e) => {
         if (randomFlag == 1) {
             paintColour = '#' + Math.floor(Math.random()*0xFFFFFF).toString(16);
             document.querySelector('#colour-selector').value = paintColour;
-
         }
         e.target.style.backgroundColor = paintColour;
     }
@@ -16,13 +15,19 @@ const paintPixel = (e) => {
 
 const clearAnimation = (numPixelsWide, numPixelsHigh) => {
     const sketchPad = document.querySelector(".sketch-pad");
-    const pixels = document.querySelectorAll('.pixel')
-    pixels.forEach((pixel) => {
-        setTimeout( () => {
-            pixel.style.backgroundColor = 'black'
-            console.log(pixel)
-        }, 1000) 
-    })
+    const pixels = Array.from(document.querySelectorAll('.pixel'))
+    if (pixels.length > 0) {
+        for (let y = 0; y < numPixelsHigh; y++) {
+            setTimeout(() => {
+                for (let x = 0; x < numPixelsWide; x++) {
+                    console.log(pixels[(y*numPixelsWide)+x]);
+                    console.log(pixels[(y*numPixelsWide)+x].backgroundColor)
+                    pixels[(y*numPixelsWide)+x].backgroundColor = 'black';
+                    console.log(pixels[(y*numPixelsWide)+x].backgroundColor)
+                }
+            }, 500)
+        }        
+    }
     while (sketchPad.firstChild) {
         sketchPad.firstChild.remove()
     }

@@ -5,6 +5,8 @@
     --sketch-pad-width: 600px;
     --cols: 1;
     --rows: 1;
+    font-family: 'Yellowtail', cursive;
+    color: gold;
 }
 
 body {

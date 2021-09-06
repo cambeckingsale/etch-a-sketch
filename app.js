@@ -13,13 +13,37 @@ const paintPixel = (e) => {
     
 }
 
+// const clearAnimation = (numPixelsHigh) => {
+//         for (let y = 0; y < numPixelsHigh; y++) {
+//             setTimeout(() => {
+//                 let row = document.querySelectorAll(`#row${y}`);
+//                 if (y > 0) {
+//                     let prevRow = document.querySelectorAll(`#row${y-1}`);
+//                     prevRow.forEach((pixel) => { 
+//                     pixel.style.backgroundColor = 'white'    
+//                     });
+//                 };
+//                 row.forEach((pixel) => { 
+//                     pixel.style.backgroundColor = 'black'                   
+//                 });         
+//             }, 500)
+//         }
+//         let lastRow = document.querySelectorAll(`#row${numPixelsHigh-1}`);
+//         lastRow.forEach((pixel) => { 
+//             pixel.style.backgroundColor = 'white'    
+//         });     
+// }
+
 const setupSketchPad = async (numPixelsWide, init) => {
     const sketchPad = document.querySelector(".sketch-pad");
     let width = sketchPad.offsetWidth
     let height = sketchPad.offsetHeight
     let numPixelsHigh = Math.ceil(height / (width/numPixelsWide));
-    while (sketchPad.firstChild) {
+    if (!init) { 
+        //clearAnimation(numPixelsHigh);
+        while (sketchPad.firstChild) {
            sketchPad.firstChild.remove()
+        }
     }
     sketchPad.style.setProperty('--cols', numPixelsWide);
     sketchPad.style.setProperty('--rows', numPixelsHigh);
